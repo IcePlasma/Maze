@@ -37,5 +37,6 @@
 //Dimensions of the maze.
 #define MAP_SIZE_X 75
 #define MAP_SIZE_Y 75
+#define TOTAL_SIZE MAP_SIZE_X * MAP_SIZE_Y
 
 #endif

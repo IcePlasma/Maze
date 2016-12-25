@@ -3,24 +3,24 @@ maze::maze()
 {
 
 	//handle used for changing text color attributes.
-	consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	//consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	
 	currentSpace = new int;
-	*currentSpace = rand() % MAP_SIZE_X * MAP_SIZE_Y;
+	*currentSpace = rand() % TOTAL_SIZE;
 
-	mazeySet = new disjSet(MAP_SIZE_X * MAP_SIZE_Y, 0);
+	mazeySet = new disjSet(TOTAL_SIZE, 0);
 
 	mazeySet->changeValue(ENTRANCE, 0);
-	mazeySet->changeValue(EXIT, MAP_SIZE_X * MAP_SIZE_Y - 1);
+	mazeySet->changeValue(EXIT, TOTAL_SIZE - 1);
 
 	/*
 	//Used for testing.
 	for (int x = 0; x < 100; x++)
 	{
-		mazeySet = new disjSet(MAP_SIZE_X * MAP_SIZE_Y, 0);
+		mazeySet = new disjSet(TOTAL_SIZE, 0);
 
 		mazeySet->changeValue(ENTRANCE, 0);
-		mazeySet->changeValue(EXIT, MAP_SIZE_X * MAP_SIZE_Y - 1);
+		mazeySet->changeValue(EXIT, TOTAL_SIZE - 1);
 		startMaze();
 		delete mazeySet;
 	}
@@ -28,9 +28,9 @@ maze::maze()
 
 	//Creates the maze
 	startMaze();
-	outputMaze();
+	//outputMaze();
 	solveMaze();
-	outputMaze();
+	//outputMaze();
 
 }
 maze::~maze()
@@ -128,7 +128,7 @@ void maze::startMaze()
 		*/
 		
 		//Making sure it doesn't exceed the bounds of the array.
-		*currentSpace %= MAP_SIZE_X * MAP_SIZE_Y;
+		*currentSpace %= TOTAL_SIZE;
 		//Picking a random direction from North, South, East, and West.
 		direction = randDir();
 		//Determining if the direction chosen will leave the bounds of the array or if that wall has already been broken down.
@@ -144,7 +144,7 @@ void maze::startMaze()
 				(*tempInt)++;
 			}
 		}
-	}while((*tempInt) < MAP_SIZE_X * MAP_SIZE_Y - 1); //Check if maze is done.
+	}while((*tempInt) < TOTAL_SIZE - 1); //Check if maze is done.
 	delete tempInt;
 	cout << endl;
 }
@@ -188,7 +188,7 @@ char maze::reverseDir(char directy)
 //Determines a random direction.
 char maze::randDir()
 {
-	switch (rand() % 4)
+	switch (rand() & 3)
 	{
 	case 0:
 		return NORTH;
@@ -214,12 +214,12 @@ bool maze::detValidDir(char directy)
 			else
 				return false;
 		case EAST:
-			if ((*currentSpace) % MAP_SIZE_X + 1 != MAP_SIZE_X && !(mazeySet->getValue(*currentSpace) & EAST) && (*currentSpace) + 1 < MAP_SIZE_X * MAP_SIZE_Y)
+			if ((*currentSpace) % MAP_SIZE_X + 1 != MAP_SIZE_X && !(mazeySet->getValue(*currentSpace) & EAST) && (*currentSpace) + 1 < TOTAL_SIZE)
 				return true;
 			else
 				return false;
 		case SOUTH:
-			if ((*currentSpace) + MAP_SIZE_X < MAP_SIZE_X * MAP_SIZE_Y && !(mazeySet->getValue(*currentSpace) & SOUTH))
+			if ((*currentSpace) + MAP_SIZE_X < TOTAL_SIZE && !(mazeySet->getValue(*currentSpace) & SOUTH))
 				return true;
 			else
 				return false;
@@ -233,6 +233,7 @@ bool maze::detValidDir(char directy)
 	}
 }
 
+/*
 //Outputs the maze.
 void maze::outputMaze()
 {
@@ -255,7 +256,9 @@ void maze::outputMaze()
 	cout << endl << endl;
 	delete code;
 }
+*/
 
+/*
 //This function interprets the left four bits in a char into a color.
 void maze::changeColor(char* mazeCode)
 {
@@ -291,6 +294,7 @@ void maze::changeColor(char* mazeCode)
 		SetConsoleTextAttribute(consoleHandle, FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE);
 	}
 }
+*/
 
 //This function converts a value in a space into an ascii character.
 char maze::codeToPiece(char charCode)
@@ -343,7 +347,7 @@ void maze::addTreasures()
 	{
 		do
 		{
-			temp = rand() % (MAP_SIZE_X * MAP_SIZE_Y);
+			temp = rand() % (TOTAL_SIZE);
 		}while((mazeySet->getValue(temp) & TREASURE));
 		mazeySet->changeValue(TREASURE, temp);
 	}

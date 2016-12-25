@@ -14,7 +14,7 @@ disjSet::disjSet(int numElements, int initial)
 }
 disjSet::~disjSet()
 {
-	delete sets;
+	delete[] sets;
 }
 
 //This function finds the root of a set and is used to test whether two sets are disjoint. It returns the index of the 

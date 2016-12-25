@@ -5,7 +5,7 @@
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
-#include "windows.h"
+//#include "windows.h"
 #include "disjSet.h"
 using namespace std;
 
@@ -16,7 +16,7 @@ class maze
 {
 	public:
 		//Output function for the maze.
-		void outputMaze();
+		//void outputMaze();
 		maze();
 		~maze();
 	private:
@@ -30,7 +30,7 @@ class maze
 		//Keeps track of what direction the program is going in relative to the maze.
 		char direction;
 		//Used to change colors in output function.
-		HANDLE consoleHandle;
+		//HANDLE consoleHandle;
 		//Changes the color of text based on the left four bits in the character passed to it.
 		void changeColor(char*);
 		//Converts the right four bits in the character passed to it into an ascii character that is a maze piece.
