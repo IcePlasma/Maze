@@ -7,6 +7,7 @@
 #include <time.h>       /* time */
 //#include "windows.h"
 #include "disjSet.h"
+#include <string>
 using namespace std;
 
 
@@ -16,7 +17,7 @@ class maze
 {
 	public:
 		//Output function for the maze.
-		//void outputMaze();
+		void outputMaze();
 		maze();
 		~maze();
 	private:
@@ -34,7 +35,7 @@ class maze
 		//Changes the color of text based on the left four bits in the character passed to it.
 		void changeColor(char*);
 		//Converts the right four bits in the character passed to it into an ascii character that is a maze piece.
-		char codeToPiece(char);
+		string codeToPiece(char);
 		//Converts directions like NORTH and SOUTH into values that can be used to move around the maze array.
 		int convertDir(char);
 		//Returns the reverse of the direction passed to it.

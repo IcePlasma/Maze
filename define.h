@@ -3,24 +3,24 @@
 //All of the defined constants are here.
 
 //Ascii characters for maze pieces.
-#define LEFT_DOWN_CORNER 187
-#define RIGHT_DOWN_CORNER 201
-#define LEFT_UP_CORNER 188
-#define RIGHT_UP_CORNER 200
-#define T_UP 202
-#define T_DOWN 203
-#define T_LEFT 185
-#define T_RIGHT 204
-#define VERTICAL 186
-#define HORIZONTAL 205
+#define RIGHT_DOWN_CORNER "\u2554"
+#define LEFT_DOWN_CORNER "\u2557"
+#define RIGHT_UP_CORNER "\u255A"
+#define LEFT_UP_CORNER "\u255D"
+#define T_UP "\u2569"
+#define T_DOWN "\u2566"
+#define T_LEFT "\u2563"
+#define T_RIGHT "\u2560"
+#define VERTICAL "\u2551"
+#define HORIZONTAL "\u2550"
 
 //Ascii representation of pieces in the maze.
-#define DOWN_CAP 208
-#define UP_CAP 210
-#define LEFT_CAP 181
-#define RIGHT_CAP 198
-#define CROSS 206
-#define NONE 219
+#define DOWN_CAP "\u2568"
+#define UP_CAP "\u2565"
+#define LEFT_CAP "\u2561"
+#define RIGHT_CAP "\u255E"
+#define CROSS "\u256C"
+#define NONE "\u2554"
 //Cardinal direction representations as numbers
 #define NORTH 1
 #define SOUTH 4

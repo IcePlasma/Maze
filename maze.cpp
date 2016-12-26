@@ -28,10 +28,9 @@ maze::maze()
 
 	//Creates the maze
 	startMaze();
-	//outputMaze();
+	outputMaze();
 	solveMaze();
-	//outputMaze();
-
+	outputMaze();
 }
 maze::~maze()
 {
@@ -233,6 +232,58 @@ bool maze::detValidDir(char directy)
 	}
 }
 
+
+
+void maze::outputMaze()
+{
+	char* code = new char;
+	for (int y = 0; y < MAP_SIZE_Y; y++)
+	{
+		for (int x = 0; x < MAP_SIZE_X; x++)
+		{
+			(*code) = mazeySet->getValue(x + y * MAP_SIZE_X);
+			changeColor(code);
+			cout << (codeToPiece(*code));
+			cout << "\033[0m";
+		}
+		cout << endl;
+	}
+	cout << endl << endl;
+	delete code;
+}
+
+void maze::changeColor(char* mazeCode)
+{
+	if ((*mazeCode) & 240)
+	{
+		if ((*mazeCode) & ENTRANCE)
+		{
+			//Sets the background color for spaces marked as the entrance. (Green)
+			cout << "\033[42m";
+			if (!(*mazeCode & NORTH))
+				(*mazeCode) += NORTH;
+		}
+		else if((*mazeCode) & EXIT)
+		{
+			//Sets the background color for the space marked as the Exit. (Red)
+			cout << "\033[41m";
+			if (!(*mazeCode & SOUTH))
+				(*mazeCode) += SOUTH;
+		}
+		else if ((*mazeCode) & DEAD_END)
+		{
+			cout << "\033[44m";
+		}
+		else if((*mazeCode) & TREASURE)
+		{
+			//Sets the background color for spaces that contain treasure. (Yellow)
+			cout << "\033[43m";
+		}
+
+	}
+}
+
+
 /*
 //Outputs the maze.
 void maze::outputMaze()
@@ -268,13 +319,15 @@ void maze::changeColor(char* mazeCode)
 		{
 			//Sets the background color for spaces marked as the entrance. (Green)
 			SetConsoleTextAttribute(consoleHandle, BACKGROUND_GREEN);
-			(*mazeCode) += NORTH;
+			if (!(*mazeCode & NORTH))
+				(*mazeCode) += NORTH;
 		}
 		else if((*mazeCode) & EXIT)
 		{
 			//Sets the background color for the space marked as the Exit. (Red)
 			SetConsoleTextAttribute(consoleHandle, BACKGROUND_RED);
-			(*mazeCode) += SOUTH;
+			if (!(*mazeCode & SOUTH))
+				(*mazeCode) += SOUTH;
 		}
 		else if ((*mazeCode) & DEAD_END)
 		{
@@ -297,7 +350,7 @@ void maze::changeColor(char* mazeCode)
 */
 
 //This function converts a value in a space into an ascii character.
-char maze::codeToPiece(char charCode)
+string maze::codeToPiece(char charCode)
 {
 	//The directions here refer to which walls are currently knocked down in the location that was passed to the function.
 	switch (charCode & 15)

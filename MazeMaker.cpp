@@ -3,6 +3,7 @@
 
 int main()
 {
+	
 	srand(unsigned(time(0)));
 	maze* aMazing = new maze;
 
